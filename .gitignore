@@ -1,0 +1,7 @@
+# Local browser-validation profiles
+.edge-*/
+
+# Local backups and operating-system files
+backups/
+Thumbs.db
+Desktop.ini
