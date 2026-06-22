@@ -19,6 +19,22 @@ const servicesSection = document.querySelector("#servicos");
 const method = document.querySelector("[data-method]");
 const stories = document.querySelector("[data-stories]");
 const currentYear = document.querySelector("[data-current-year]");
+const mobilePerformanceMode = window.matchMedia("(max-width: 820px)");
+
+const loadDeferredImage = (image) => {
+  if (!image) return Promise.resolve();
+
+  if (!image.getAttribute("src") && image.dataset.src) {
+    image.src = image.dataset.src;
+  }
+
+  if (image.complete) return Promise.resolve();
+
+  return new Promise((resolve) => {
+    image.addEventListener("load", resolve, { once: true });
+    image.addEventListener("error", resolve, { once: true });
+  });
+};
 
 if (currentYear) {
   currentYear.textContent = String(new Date().getFullYear());
@@ -135,7 +151,7 @@ if (servicesSection) {
   const reducedLineMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const revealServiceLines = () => servicesSection.classList.add("is-visible");
 
-  if (reducedLineMotion.matches || !("IntersectionObserver" in window)) {
+  if (mobilePerformanceMode.matches || reducedLineMotion.matches || !("IntersectionObserver" in window)) {
     revealServiceLines();
   } else {
     const serviceLineObserver = new IntersectionObserver(
@@ -188,22 +204,24 @@ if (hero) {
       activeSlide.classList.add("is-active");
       activeIndicator.classList.add("is-active");
 
-      heroInterval = window.setInterval(() => {
-        showSlide((activeIndex + 1) % slides.length);
+      heroInterval = window.setInterval(async () => {
+        const nextIndex = (activeIndex + 1) % slides.length;
+        await loadDeferredImage(slides[nextIndex]);
+        showSlide(nextIndex);
       }, 4000);
     }
   };
 
-  const imagesReady = slides.map((slide) => {
-    if (slide.complete) return Promise.resolve();
-    return new Promise((resolve) => {
-      slide.addEventListener("load", resolve, { once: true });
-      slide.addEventListener("error", resolve, { once: true });
-    });
-  });
+  const prepareHeroSlides = () => {
+    const initialSlides = mobilePerformanceMode.matches ? slides.slice(0, 1) : slides;
+    return Promise.all(initialSlides.map(loadDeferredImage));
+  };
 
-  Promise.all(imagesReady).then(startHero);
+  prepareHeroSlides().then(startHero);
   reducedMotion.addEventListener("change", startHero);
+  mobilePerformanceMode.addEventListener("change", () => {
+    prepareHeroSlides().then(startHero);
+  });
   window.addEventListener("pagehide", stopHero, { once: true });
 }
 
@@ -246,7 +264,7 @@ if (method) {
 
   const startMethod = () => {
     stopMethod();
-    if (imagesReady && !reducedMotion.matches && stages.length > 1) {
+    if (imagesReady && !mobilePerformanceMode.matches && !reducedMotion.matches && stages.length > 1) {
       methodInterval = window.setInterval(() => {
         showMethodStage((activeIndex + 1) % stages.length);
       }, 4000);
@@ -254,8 +272,11 @@ if (method) {
   };
 
   const selectMethodStage = (index) => {
-    showMethodStage(index);
-    startMethod();
+    stopMethod();
+    loadDeferredImage(images[index]).then(() => {
+      showMethodStage(index);
+      startMethod();
+    });
   };
 
   stages.forEach((stage, index) => {
@@ -275,20 +296,21 @@ if (method) {
     });
   });
 
-  const imageLoads = images.map((image) => {
-    if (image.complete) return Promise.resolve();
-    return new Promise((resolve) => {
-      image.addEventListener("load", resolve, { once: true });
-      image.addEventListener("error", resolve, { once: true });
+  const prepareMethodImages = () => {
+    stopMethod();
+    imagesReady = false;
+    const initialImages = mobilePerformanceMode.matches ? images.slice(0, 1) : images;
+
+    Promise.all(initialImages.map(loadDeferredImage)).then(() => {
+      imagesReady = true;
+      startMethod();
     });
-  });
+  };
 
   showMethodStage(0);
-  Promise.all(imageLoads).then(() => {
-    imagesReady = true;
-    startMethod();
-  });
+  prepareMethodImages();
   reducedMotion.addEventListener("change", startMethod);
+  mobilePerformanceMode.addEventListener("change", prepareMethodImages);
   window.addEventListener("pagehide", stopMethod, { once: true });
 }
 
@@ -419,7 +441,9 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-if ("IntersectionObserver" in window) {
+if (mobilePerformanceMode.matches) {
+  revealItems.forEach((item) => item.classList.add("is-visible"));
+} else if ("IntersectionObserver" in window) {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {

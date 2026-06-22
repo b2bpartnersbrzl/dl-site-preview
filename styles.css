@@ -3446,3 +3446,30 @@ h3 {
     padding: 13px 18px 18px;
   }
 }
+
+/* Mobile performance: content is immediate and large-area motion is static. */
+@media (max-width: 820px) {
+  .reveal,
+  .reveal.is-visible,
+  .differential-item.reveal,
+  .differential-item.reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .section.services,
+  .section.cases {
+    animation: none;
+  }
+
+  .hero-slide,
+  .hero-slide.is-active {
+    transform: none;
+  }
+
+  .hero-slide {
+    transition: opacity 480ms ease;
+    will-change: opacity;
+  }
+}
