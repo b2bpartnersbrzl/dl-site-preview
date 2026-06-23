@@ -3473,33 +3473,3 @@ h3 {
     will-change: opacity;
   }
 }
-
-/*
- * BLOQUEIO TEMPORÁRIO DE HOMOLOGAÇÃO MOBILE
- * Remover integralmente este bloco após a validação da versão desktop.
- */
-@media (max-width: 767px) {
-  body {
-    overflow: hidden;
-  }
-
-  body::before {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 32px;
-    background: #061f36;
-    color: #ffffff;
-    content: "Visualização mobile temporariamente bloqueada.\A\A Para esta etapa de homologação, avalie primeiro a versão desktop do site. Após essa validação, liberaremos a revisão mobile.";
-    font: 500 18px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    text-align: center;
-    white-space: pre-line;
-  }
-
-  body > * {
-    pointer-events: none;
-  }
-}
