@@ -2209,7 +2209,7 @@ body.menu-scroll-lock {
         margin-left: calc(50% - 50vw);
         margin-right: calc(50% - 50vw);
         margin-bottom: 24px;
-        background-color: #020407;
+        background-color: transparent;
         contain: layout paint;
     }
 
