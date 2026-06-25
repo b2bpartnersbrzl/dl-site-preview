@@ -764,6 +764,12 @@ body.menu-scroll-lock {
     opacity: 0.82;
 }
 
+.contato-mapa-picture {
+    display: block;
+    width: auto;
+    height: 100%;
+}
+
 .contato-shell {
     position: relative;
     z-index: 2;
@@ -2199,14 +2205,20 @@ body.menu-scroll-lock {
     .contato-mapa-mobile {
         width: 100vw;
         max-width: none;
+        aspect-ratio: 1280 / 853;
         margin-left: calc(50% - 50vw);
         margin-right: calc(50% - 50vw);
         margin-bottom: 24px;
+        background-color: #020407;
+        contain: layout paint;
     }
 
     .contato-mapa-mobile img {
         width: 100vw;
+        height: 100%;
         max-width: none;
+        object-fit: cover;
+        object-position: center;
     }
 }
 /* Mobile flow optimization: preserva elementos, reduz repaints e melhora resposta ao toque */
@@ -2217,10 +2229,14 @@ body.menu-scroll-lock {
     }
 
     #servicos,
-    #metodo,
-    #contato {
+    #metodo {
         content-visibility: auto;
         contain-intrinsic-size: 900px;
+        scroll-margin-top: 90px;
+    }
+
+    #contato {
+        content-visibility: visible;
         scroll-margin-top: 90px;
     }
 
@@ -2254,9 +2270,13 @@ body.menu-scroll-lock {
         user-select: none;
     }
 
-    .contato-mapa-mobile img,
-    .contato-mapa,
     .logo img {
         content-visibility: auto;
+    }
+
+    .contato-mapa-mobile,
+    .contato-mapa-mobile img,
+    .contato-mapa {
+        content-visibility: visible;
     }
 }
