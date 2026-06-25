@@ -2209,3 +2209,54 @@ body.menu-scroll-lock {
         max-width: none;
     }
 }
+/* Mobile flow optimization: preserva elementos, reduz repaints e melhora resposta ao toque */
+@media (max-width: 768px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
+    #servicos,
+    #metodo,
+    #contato {
+        content-visibility: auto;
+        contain-intrinsic-size: 900px;
+        scroll-margin-top: 90px;
+    }
+
+    .slider-container,
+    .metodo-imagens,
+    .contato-mapa-mobile,
+    #servicos .services-list,
+    .contato-form-panel {
+        contain: layout paint;
+    }
+
+    .slide,
+    .img-metodo {
+        will-change: opacity;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+
+    .menu-burguer,
+    .menu-navegacao a,
+    #servicos .service-item,
+    .item-metodo,
+    .contato-btn,
+    .contato-submit,
+    .services-cta-button {
+        touch-action: manipulation;
+    }
+
+    #servicos .service-item,
+    .item-metodo {
+        user-select: none;
+    }
+
+    .contato-mapa-mobile img,
+    .contato-mapa,
+    .logo img {
+        content-visibility: auto;
+    }
+}
