@@ -1728,3 +1728,43 @@ body.menu-scroll-lock {
         font-size: 14px;
     }
 }
+/* Servicos mobile: expansao instantanea e sem custo de layout pesado */
+@media (max-width: 768px) {
+    #servicos .service-bg {
+        display: none;
+    }
+
+    #servicos .service-item {
+        opacity: 0.74;
+        transform: none;
+        transition: opacity 0.08s linear;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    #servicos .service-item.active {
+        opacity: 1;
+    }
+
+    #servicos .service-item h3,
+    #servicos .service-item.active h3 {
+        transform: none;
+        transition: none;
+    }
+
+    #servicos .service-item p {
+        display: none;
+        max-height: none;
+        margin-top: 10px;
+        opacity: 1;
+        overflow: visible;
+        transform: none;
+        transition: none;
+    }
+
+    #servicos .service-item.active p {
+        display: block;
+        max-height: none;
+        opacity: 1;
+        transform: none;
+    }
+}

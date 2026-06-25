@@ -378,9 +378,11 @@
                         item.setAttribute('aria-expanded', ativo ? 'true' : 'false');
                     });
 
-                    serviceBackgrounds.forEach((bg, i) => {
-                        bg.classList.toggle('active', i === index);
-                    });
+                    if (desktopQuery.matches) {
+                        serviceBackgrounds.forEach((bg, i) => {
+                            bg.classList.toggle('active', i === index);
+                        });
+                    }
                 };
 
                 serviceItems.forEach((item, index) => {
