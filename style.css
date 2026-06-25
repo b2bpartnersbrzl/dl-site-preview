@@ -2032,3 +2032,45 @@ body.menu-scroll-lock {
         margin-top: 0;
     }
 }
+/* CTA Servicos e formulario Contato: peso e resposta mobile */
+@media (max-width: 768px) {
+    #servicos .services-cta-button,
+    #servicos .services-cta-mobile .services-cta-button {
+        width: auto;
+        min-height: 48px;
+        padding: 14px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.74);
+        border-radius: 6px;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: 0.01em;
+        text-align: center;
+    }
+
+    #servicos .services-cta-button:hover,
+    #servicos .services-cta-button:focus {
+        background-color: rgba(255, 255, 255, 0.92);
+        border-color: rgba(255, 255, 255, 0.92);
+        color: #1a1a2e;
+    }
+
+    .contato-form-panel {
+        display: none;
+        max-height: none;
+        margin-top: 0;
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .section-contato.form-open .contato-form-panel {
+        display: block;
+        margin-top: 24px;
+        max-height: none;
+        opacity: 1;
+        transform: none;
+    }
+}
