@@ -1559,6 +1559,7 @@ body.menu-scroll-lock {
     .menu-navegacao {
         height: 100svh;
     }
+
     .header-principal,
     .menu-navegacao,
     .copyright-bar {
@@ -1593,37 +1594,36 @@ body.menu-scroll-lock {
     }
 
     .slide {
-        animation: none;
-        opacity: 0;
+        animation-duration: 18s;
     }
 
-    .img-implantacao {
-        opacity: 1;
+    #servicos .service-bg {
+        transition: none;
+        transform: none;
+        filter: none;
     }
 
-    .img-logistica,
-    .img-producao,
-    .img-transporte,
-    #servicos .service-bg,
-    .img-metodo {
-        background-image: none !important;
-    }
-
-    #servicos .services-bg-layer,
-    .metodo-imagens,
-    .contato-arte {
+    #servicos .services-overlay::before,
+    #servicos .services-overlay::after {
         display: none;
     }
 
-    #servicos.services-editorial,
     .section-metodo,
     .section-contato {
         animation: none;
         background-size: 100% 100%;
     }
 
-    #servicos .services-overlay::before,
-    #servicos .services-overlay::after {
+    .metodo-imagens {
+        display: block;
+        height: 300px;
+    }
+
+    .img-metodo {
+        transition: opacity 0.18s ease, visibility 0.18s ease;
+    }
+
+    .contato-arte {
         display: none;
     }
 
@@ -1633,13 +1633,23 @@ body.menu-scroll-lock {
     .item-metodo,
     .metodo-numero,
     .metodo-texto h3,
-    .contato-form-panel,
     .contato-btn,
     .contato-submit {
-        transition-duration: 0.16s;
+        transition-duration: 0.12s;
+    }
+
+    #servicos .service-item p {
+        transition: opacity 0.12s ease, transform 0.12s ease, margin-top 0.12s ease;
+    }
+
+    .contato-form-panel {
+        transition: max-height 0.16s ease, opacity 0.12s ease, transform 0.16s ease, margin-top 0.16s ease;
+    }
+
+    .section-contato.form-open .contato-form-panel {
+        max-height: none;
     }
 }
-
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
