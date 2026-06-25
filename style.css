@@ -2156,3 +2156,17 @@ body.menu-scroll-lock {
     30% { opacity: 0; }
     100% { opacity: 0; }
 }
+/* CTA Servicos mobile alinhado aos CTAs de Contato */
+@media (max-width: 768px) {
+    #servicos .services-cta-mobile {
+        align-items: center;
+    }
+
+    #servicos .services-cta-button,
+    #servicos .services-cta-mobile .services-cta-button {
+        width: min(100%, 340px);
+        align-self: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
