@@ -2113,3 +2113,46 @@ body.menu-scroll-lock {
         background-position: center center;
     }
 }
+/* Hero mobile: ciclo sem vazio entre quarta e primeira imagem */
+@media (max-width: 768px) {
+    .slide {
+        animation: none;
+    }
+
+    .img-implantacao {
+        background-image: url('images/0001_mobile.webp');
+        opacity: 1;
+        z-index: 1;
+    }
+
+    .img-logistica,
+    .img-producao,
+    .img-transporte {
+        opacity: 0;
+        z-index: 2;
+        animation: heroMobileOverlay 16s infinite ease-in-out;
+    }
+
+    .img-logistica {
+        background-image: url('images/0002_mobile.webp');
+        animation-delay: 4s;
+    }
+
+    .img-producao {
+        background-image: url('images/0003_mobile.webp');
+        animation-delay: 8s;
+    }
+
+    .img-transporte {
+        background-image: url('images/0004_mobile.webp');
+        animation-delay: 12s;
+    }
+}
+
+@keyframes heroMobileOverlay {
+    0% { opacity: 0; }
+    4% { opacity: 1; }
+    24% { opacity: 1; }
+    30% { opacity: 0; }
+    100% { opacity: 0; }
+}
