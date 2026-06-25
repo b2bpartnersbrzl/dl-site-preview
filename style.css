@@ -2102,3 +2102,14 @@ body.menu-scroll-lock {
         line-height: 1;
     }
 }
+/* Hero mobile: teste com imagens verticais dedicadas */
+@media (max-width: 768px) {
+    .img-implantacao { background-image: url('images/0001_mobile.webp'); }
+    .img-logistica { background-image: url('images/0002_mobile.webp'); }
+    .img-producao { background-image: url('images/0003_mobile.webp'); }
+    .img-transporte { background-image: url('images/0004_mobile.webp'); }
+
+    .slide {
+        background-position: center center;
+    }
+}
