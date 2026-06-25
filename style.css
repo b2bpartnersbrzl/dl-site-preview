@@ -2194,3 +2194,18 @@ body.menu-scroll-lock {
         align-items: flex-start;
     }
 }
+/* Mapa mobile full-bleed */
+@media (max-width: 768px) {
+    .contato-mapa-mobile {
+        width: 100vw;
+        max-width: none;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        margin-bottom: 24px;
+    }
+
+    .contato-mapa-mobile img {
+        width: 100vw;
+        max-width: none;
+    }
+}
