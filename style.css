@@ -2074,3 +2074,31 @@ body.menu-scroll-lock {
         transform: none;
     }
 }
+/* Mobile headlines: largura natural, sem achatamento lateral */
+@media (max-width: 768px) {
+    .conteudo-hero h1,
+    #servicos .services-intro h2,
+    .metodo-conteudo h2,
+    .contato-copy h2 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-stretch: normal;
+        font-synthesis: none;
+        letter-spacing: 0;
+        transform: none !important;
+        scale: 1;
+        text-rendering: optimizeLegibility;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    .conteudo-hero h1 {
+        font-size: clamp(2.55rem, 11vw, 3.25rem);
+        line-height: 0.98;
+    }
+
+    #servicos .services-intro h2,
+    .contato-copy h2 {
+        font-size: clamp(2.35rem, 10vw, 2.95rem);
+        line-height: 1;
+    }
+}
