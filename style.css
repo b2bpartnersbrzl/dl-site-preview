@@ -1546,3 +1546,107 @@ body.menu-scroll-lock {
         font-size: 0.68rem;
     }
 }
+/* Ajustes temporarios de performance e consistencia tipografica no mobile */
+@media (max-width: 768px) {
+    .section-full,
+    .section-hero,
+    .conteudo-hero,
+    #servicos .services-shell,
+    .contato-shell {
+        min-height: 100svh;
+    }
+
+    .menu-navegacao {
+        height: 100svh;
+    }
+    .header-principal,
+    .menu-navegacao,
+    .copyright-bar {
+        backdrop-filter: none;
+    }
+
+    .conteudo-hero h1,
+    #servicos .services-intro h2,
+    .metodo-conteudo h2,
+    .contato-copy h2 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        transform: none;
+        text-rendering: geometricPrecision;
+    }
+
+    .conteudo-hero h1 {
+        font-size: clamp(2.65rem, 12vw, 3.35rem);
+        line-height: 0.95;
+    }
+
+    #servicos .services-intro h2,
+    .contato-copy h2 {
+        font-size: clamp(2.45rem, 10.5vw, 3rem);
+        line-height: 0.98;
+    }
+
+    .metodo-conteudo h2 {
+        font-size: clamp(2.1rem, 9vw, 2.65rem);
+        line-height: 1.02;
+    }
+
+    .slide {
+        animation: none;
+        opacity: 0;
+    }
+
+    .img-implantacao {
+        opacity: 1;
+    }
+
+    .img-logistica,
+    .img-producao,
+    .img-transporte,
+    #servicos .service-bg,
+    .img-metodo {
+        background-image: none !important;
+    }
+
+    #servicos .services-bg-layer,
+    .metodo-imagens,
+    .contato-arte {
+        display: none;
+    }
+
+    #servicos.services-editorial,
+    .section-metodo,
+    .section-contato {
+        animation: none;
+        background-size: 100% 100%;
+    }
+
+    #servicos .services-overlay::before,
+    #servicos .services-overlay::after {
+        display: none;
+    }
+
+    #servicos .service-item,
+    #servicos .service-item h3,
+    #servicos .service-item p,
+    .item-metodo,
+    .metodo-numero,
+    .metodo-texto h3,
+    .contato-form-panel,
+    .contato-btn,
+    .contato-submit {
+        transition-duration: 0.16s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+    }
+}

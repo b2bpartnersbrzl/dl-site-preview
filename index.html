@@ -25,7 +25,7 @@
     <link rel="icon" href="assets/favicon_dl.svg" type="image/svg+xml" sizes="any">
     <link rel="icon" href="assets/favicon_dl.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/favicon_dl_maior.png">
-    <link rel="preload" as="image" href="images/mapa.webp" type="image/webp">
+    <link rel="preload" as="image" href="images/implantacao-clinica.webp" type="image/webp">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -189,7 +189,7 @@
 
         <section id="contato" class="section-full section-contato" aria-labelledby="contato-title">
             <div class="contato-arte" aria-hidden="true">
-                <img class="contato-mapa" src="images/mapa.webp" alt="" loading="eager" fetchpriority="high" decoding="async">
+                <img class="contato-mapa" src="images/mapa.webp" alt="" loading="lazy" fetchpriority="low" decoding="async">
             </div>
 
             <div class="contato-shell">
@@ -565,6 +565,7 @@
 
                 const iniciarLoop = () => {
                     pararLoop();
+                    if (!desktopQuery.matches) return;
                     loopMetodo = setInterval(proximoPasso, 4500);
                 };
 
@@ -589,6 +590,7 @@
 
                 ativarPasso(0);
                 iniciarLoop();
+                desktopQuery.addEventListener('change', iniciarLoop);
             }
         });
     </script>
