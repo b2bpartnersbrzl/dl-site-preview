@@ -1768,3 +1768,31 @@ body.menu-scroll-lock {
         transform: none;
     }
 }
+/* Servicos mobile: remove imagens de fundo */
+@media (max-width: 768px) {
+    #servicos .services-bg-layer,
+    #servicos .service-bg {
+        display: none !important;
+        background-image: none !important;
+    }
+
+    #servicos .bg-01,
+    #servicos .bg-02,
+    #servicos .bg-03,
+    #servicos .bg-04,
+    #servicos .bg-05 {
+        background-image: none !important;
+    }
+
+    #servicos .services-overlay,
+    #servicos .services-overlay::before,
+    #servicos .services-overlay::after {
+        display: none !important;
+        background: none !important;
+    }
+
+    #servicos.services-editorial {
+        background: #1a1a2e !important;
+        animation: none !important;
+    }
+}
