@@ -1974,3 +1974,61 @@ body.menu-scroll-lock {
         box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.16);
     }
 }
+/* Refinos finais de Servicos no mobile */
+@media (max-width: 768px) {
+    #servicos.services-editorial {
+        background: radial-gradient(circle, #2a3a56 0%, #1a1a2e 65%) !important;
+        background-size: 250% 250% !important;
+        animation: deslocamentoEsferico 10s ease-in-out infinite alternate !important;
+    }
+
+    #servicos .service-item {
+        padding-left: 30px;
+        padding-bottom: 22px;
+    }
+
+    #servicos .service-item:not(:last-child)::before {
+        top: 20px;
+        bottom: 0;
+        left: 7px;
+        background-color: rgba(255, 255, 255, 0.22);
+    }
+
+    #servicos .service-item::after,
+    #servicos .service-item:nth-child(1)::after,
+    #servicos .service-item:nth-child(2)::after,
+    #servicos .service-item:nth-child(3)::after,
+    #servicos .service-item:nth-child(4)::after,
+    #servicos .service-item:nth-child(5)::after {
+        content: '';
+        top: 6px;
+        left: 0;
+        width: 14px;
+        height: 14px;
+        border: 1px solid rgba(125, 224, 176, 0.68);
+        background-color: rgba(45, 106, 79, 0.64);
+        box-shadow: none;
+        font-size: 0;
+    }
+
+    #servicos .service-item.active::after {
+        background-color: #2d6a4f;
+        border-color: rgba(125, 224, 176, 0.9);
+        box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.18);
+    }
+
+    #servicos .service-item:last-child {
+        border-bottom: 0;
+        padding-bottom: 18px;
+    }
+
+    #servicos .services-cta-separator {
+        height: 1px;
+        margin: 2px 0 18px;
+        background-color: rgba(255, 255, 255, 0.34);
+    }
+
+    #servicos .services-cta-mobile {
+        margin-top: 0;
+    }
+}
