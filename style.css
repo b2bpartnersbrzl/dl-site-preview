@@ -2376,3 +2376,41 @@ body.menu-scroll-lock {
         margin-top: 18px;
     }
 }
+
+/* Servicos mobile: cards full-bleed sem marcadores */
+@media (max-width: 768px) {
+    #servicos .services-list {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        gap: 0;
+    }
+
+    #servicos .service-item,
+    #servicos .service-item.active {
+        min-height: 184px;
+        padding: 86px 20px 22px;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    #servicos .service-item:not(:last-child) {
+        margin-bottom: 0;
+    }
+
+    #servicos .service-item::after,
+    #servicos .service-item.active::after,
+    #servicos .service-item:nth-child(1)::after,
+    #servicos .service-item:nth-child(2)::after,
+    #servicos .service-item:nth-child(3)::after,
+    #servicos .service-item:nth-child(4)::after,
+    #servicos .service-item:nth-child(5)::after {
+        display: none;
+        content: none;
+    }
+
+    #servicos .service-item:last-child {
+        border-bottom: 0;
+    }
+}
