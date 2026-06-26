@@ -2281,14 +2281,13 @@ body.menu-scroll-lock {
 
     #servicos,
     #metodo {
-        content-visibility: auto;
-        contain-intrinsic-size: 900px;
-        scroll-margin-top: 90px;
+        content-visibility: visible;
+        scroll-margin-top: 102px;
     }
 
     #contato {
         content-visibility: visible;
-        scroll-margin-top: 90px;
+        scroll-margin-top: 102px;
     }
 
     .slider-container,
@@ -2463,5 +2462,65 @@ body.menu-scroll-lock {
 
     #servicos .service-item:last-child {
         border-bottom: 0;
+    }
+}
+
+/* Mobile: evita que Servicos e Metodo entrem sob o header fixo */
+@media (max-width: 768px) {
+    html {
+        scroll-padding-top: 102px;
+    }
+
+    #servicos,
+    #metodo {
+        scroll-margin-top: 102px;
+        overflow: visible;
+    }
+
+    #servicos .services-shell {
+        padding-top: max(112px, calc(90px + env(safe-area-inset-top) + 22px));
+    }
+
+    .container-metodo {
+        padding-top: max(122px, calc(90px + env(safe-area-inset-top) + 32px));
+    }
+}
+
+/* Mobile: zona segura global abaixo do header fixo */
+@media (max-width: 768px) {
+    :root {
+        --mobile-header-safe: calc(90px + env(safe-area-inset-top) + 24px);
+        --mobile-anchor-safe: calc(90px + env(safe-area-inset-top) + 18px);
+    }
+
+    html {
+        scroll-padding-top: var(--mobile-anchor-safe);
+    }
+
+    .wrapper-horizontal > section {
+        scroll-margin-top: var(--mobile-anchor-safe);
+    }
+
+    .section-full:not(.section-hero) {
+        justify-content: flex-start;
+    }
+
+    #servicos .services-shell,
+    .gestao-bpx-temp,
+    .container-metodo,
+    .contato-shell {
+        padding-top: max(var(--mobile-header-safe), 114px);
+    }
+
+    .section-placeholder {
+        padding-top: max(var(--mobile-header-safe), 114px);
+    }
+
+    .section-especialistas {
+        align-items: flex-start;
+    }
+
+    .conteudo-hero {
+        padding-top: max(90px, calc(90px + env(safe-area-inset-top)));
     }
 }
