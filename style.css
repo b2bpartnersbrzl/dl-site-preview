@@ -1572,36 +1572,21 @@ body.menu-scroll-lock {
 }
 
 /* ==========================================================================
-   BARRA DISCRETA DE DIREITOS AUTORAIS
+   RODAPÉ DISCRETO DE DIREITOS AUTORAIS
    ========================================================================== */
-.copyright-bar {
-    position: fixed;
-    right: 0;
-    bottom: 24px;
-    z-index: 900;
-    width: fit-content;
-    max-width: calc(100% - 32px);
-    padding: 8px 18px 8px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-right: 0;
-    border-radius: 999px 0 0 999px;
-    background-color: rgba(26, 26, 46, 0.34);
-    backdrop-filter: blur(10px);
-    color: rgba(255, 255, 255, 0.72);
+.section-copyright {
+    grid-column: 1 / -1;
+    width: 100vw;
+    margin: 22px calc(50% - 50vw) 0;
+    padding: 10px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    background-color: rgba(12, 16, 29, 0.88);
+    color: rgba(255, 255, 255, 0.70);
     font-size: 0.74rem;
     font-weight: 600;
     line-height: 1;
     letter-spacing: 0.01em;
-    pointer-events: none;
-}
-
-@media (max-width: 768px) {
-    .copyright-bar {
-        bottom: 16px;
-        max-width: calc(100% - 24px);
-        padding: 7px 14px 7px 16px;
-        font-size: 0.68rem;
-    }
+    text-align: right;
 }
 /* Ajustes temporarios de performance e consistencia tipografica no mobile */
 @media (max-width: 768px) {
@@ -1618,8 +1603,7 @@ body.menu-scroll-lock {
     }
 
     .header-principal,
-    .menu-navegacao,
-    .copyright-bar {
+    .menu-navegacao {
         backdrop-filter: none;
     }
 
@@ -2611,18 +2595,18 @@ body.menu-scroll-lock {
 
 /* Servicos: respiro inferior real da secao */
 #servicos .services-shell {
-    padding-bottom: max(76px, calc(58px + env(safe-area-inset-bottom)));
+    padding-bottom: 0;
 }
 
 @media (max-width: 1100px) {
     #servicos .services-shell {
-        padding-bottom: max(96px, calc(76px + env(safe-area-inset-bottom)));
+        padding-bottom: 0;
     }
 }
 
 @media (max-width: 768px) {
     #servicos .services-shell {
-        padding-bottom: max(84px, calc(66px + env(safe-area-inset-bottom)));
+        padding-bottom: 0;
     }
 }
 
@@ -2633,17 +2617,15 @@ body.menu-scroll-lock {
     }
 
     #servicos .services-shell::after {
-        content: '';
-        display: block;
-        grid-column: 1 / -1;
-        width: 100%;
-        height: max(96px, calc(76px + env(safe-area-inset-bottom)));
+        display: none;
+        content: none;
     }
 }
 
 @media (max-width: 768px) {
     #servicos .services-shell::after {
-        height: max(84px, calc(66px + env(safe-area-inset-bottom)));
+        display: none;
+        content: none;
     }
 }
 
@@ -2653,11 +2635,8 @@ body.menu-scroll-lock {
 }
 
 #servicos .services-shell::after {
-    content: '';
-    display: block;
-    grid-column: 1 / -1;
-    width: 100%;
-    height: var(--services-scroll-spacer);
+    display: none;
+    content: none;
     pointer-events: none;
 }
 
