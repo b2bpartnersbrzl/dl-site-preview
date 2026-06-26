@@ -336,7 +336,7 @@ body.menu-scroll-lock {
 
 #servicos .services-cta-text {
     margin: 0 0 18px;
-    color: rgba(255, 255, 255, 0.68);
+    color: rgba(255, 255, 255, 0.86);
     font-size: 0.98rem;
     font-weight: 400;
     line-height: 1.65;
@@ -1572,36 +1572,33 @@ body.menu-scroll-lock {
 }
 
 /* ==========================================================================
-   BARRA DISCRETA DE DIREITOS AUTORAIS
+   RODAPÉ DISCRETO DE DIREITOS AUTORAIS
    ========================================================================== */
 .copyright-bar {
     position: fixed;
+    left: 0;
     right: 0;
-    bottom: 24px;
+    bottom: 0;
     z-index: 900;
-    width: fit-content;
-    max-width: calc(100% - 32px);
-    padding: 8px 18px 8px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-right: 0;
-    border-radius: 999px 0 0 999px;
-    background-color: rgba(26, 26, 46, 0.34);
-    backdrop-filter: blur(10px);
-    color: rgba(255, 255, 255, 0.72);
-    font-size: 0.74rem;
-    font-weight: 600;
-    line-height: 1;
+    width: 100%;
+    padding: 6px 24px;
+    border: 0;
+    border-radius: 0;
+    background-color: rgba(26, 26, 46, 0.14);
+    color: rgba(255, 255, 255, 0.54);
+    font-size: 0.68rem;
+    font-weight: 500;
+    line-height: 1.25;
     letter-spacing: 0.01em;
+    text-align: right;
     pointer-events: none;
 }
 
 @media (max-width: 768px) {
     .copyright-bar {
-        bottom: 16px;
-        max-width: calc(100% - 24px);
-        padding: 7px 14px 7px 16px;
-        font-size: 0.68rem;
-        backdrop-filter: none;
+        padding: 6px 16px;
+        font-size: 0.64rem;
+        text-align: center;
     }
 }
 /* Ajustes temporarios de performance e consistencia tipografica no mobile */
@@ -1978,7 +1975,7 @@ body.menu-scroll-lock {
     }
 
     #servicos .services-cta-text {
-        color: #a0aabf;
+        color: rgba(255, 255, 255, 0.78);
         font-size: 0.9rem;
         line-height: 1.5;
         text-shadow: none;
@@ -2668,8 +2665,55 @@ body.menu-scroll-lock {
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1101px) {
+    #servicos .services-shell {
+        align-items: start;
+    }
+
     #servicos .services-cta {
-        margin-top: clamp(124px, 22vh, 180px);
+        margin-top: clamp(52px, 9.2vh, 76px);
+    }
+
+    #servicos .services-list {
+        align-self: start;
+        padding-top: 12px;
+    }
+}
+
+
+/* Ajuste pontual: Serviços desktop - CTA mais alto, texto semi-bold e item ativo único */
+@media (min-width: 1101px) {
+    #servicos .services-cta {
+        margin-top: clamp(39px, 6.9vh, 57px);
+    }
+
+    #servicos .services-cta-text {
+        font-weight: 600;
+    }
+
+    #servicos .service-item:not(.active),
+    #servicos .service-item:not(.active):hover,
+    #servicos .service-item:not(.active):focus {
+        opacity: 0.42;
+        transform: none;
+    }
+
+    #servicos .service-item:not(.active) h3,
+    #servicos .service-item:not(.active):hover h3,
+    #servicos .service-item:not(.active):focus h3 {
+        transform: none;
+    }
+
+    #servicos .service-item:not(.active) p,
+    #servicos .service-item:not(.active):hover p,
+    #servicos .service-item:not(.active):focus p {
+        margin-top: 0;
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    #servicos .service-item.active {
+        opacity: 1;
     }
 }
