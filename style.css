@@ -1575,21 +1575,20 @@ body.menu-scroll-lock {
    RODAPÉ DISCRETO DE DIREITOS AUTORAIS
    ========================================================================== */
 :root {
-    --section-copyright-height: 34px;
+    --section-copyright-height: 28px;
 }
 
 .wrapper-horizontal > section::after {
     content: '© 2026 DL Assessoria Regulatória.';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: relative;
     z-index: 40;
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    min-height: var(--section-copyright-height);
-    padding: 8px 24px;
+    width: 100%;
+    min-height: 0;
+    padding: 7px 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.13);
     background-color: rgba(10, 14, 26, 0.42);
     color: rgba(255, 255, 255, 0.68);
@@ -1604,11 +1603,11 @@ body.menu-scroll-lock {
 
 @media (max-width: 768px) {
     :root {
-        --section-copyright-height: 32px;
+        --section-copyright-height: 26px;
     }
 
     .wrapper-horizontal > section::after {
-        padding: 7px 18px;
+        padding: 6px 16px;
         font-size: 0.68rem;
         backdrop-filter: none;
     }
@@ -2722,5 +2721,31 @@ body.menu-scroll-lock {
 @media (min-width: 769px) {
     #servicos .services-cta {
         margin-top: clamp(124px, 22vh, 180px);
+    }
+}
+
+/* Copyright no fluxo: a barra e o fim absoluto da secao */
+.wrapper-horizontal > section:not(.section-hero) {
+    flex-direction: column;
+    padding-bottom: 0;
+}
+
+#servicos .services-shell,
+.gestao-bpx-temp,
+.container-metodo,
+.section-placeholder,
+.contato-shell {
+    min-height: calc(100vh - var(--section-copyright-height));
+    padding-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+    #servicos .services-shell,
+    .gestao-bpx-temp,
+    .container-metodo,
+    .section-placeholder,
+    .contato-shell {
+        min-height: calc(100svh - var(--section-copyright-height));
+        padding-bottom: 16px;
     }
 }
