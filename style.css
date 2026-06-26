@@ -1574,19 +1574,44 @@ body.menu-scroll-lock {
 /* ==========================================================================
    RODAPÉ DISCRETO DE DIREITOS AUTORAIS
    ========================================================================== */
-.section-copyright {
-    grid-column: 1 / -1;
-    width: 100vw;
-    margin: 22px calc(50% - 50vw) 0;
-    padding: 10px 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.16);
-    background-color: rgba(12, 16, 29, 0.88);
-    color: rgba(255, 255, 255, 0.70);
+:root {
+    --section-copyright-height: 34px;
+}
+
+.wrapper-horizontal > section::after {
+    content: '© 2026 DL Assessoria Regulatória.';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--section-copyright-height);
+    padding: 8px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+    background-color: rgba(10, 14, 26, 0.42);
+    color: rgba(255, 255, 255, 0.68);
     font-size: 0.74rem;
     font-weight: 600;
     line-height: 1;
     letter-spacing: 0.01em;
-    text-align: right;
+    text-align: center;
+    pointer-events: none;
+    backdrop-filter: blur(6px);
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-copyright-height: 32px;
+    }
+
+    .wrapper-horizontal > section::after {
+        padding: 7px 18px;
+        font-size: 0.68rem;
+        backdrop-filter: none;
+    }
 }
 /* Ajustes temporarios de performance e consistencia tipografica no mobile */
 @media (max-width: 768px) {
@@ -2649,5 +2674,53 @@ body.menu-scroll-lock {
 @media (max-width: 768px) {
     #servicos {
         --services-scroll-spacer: 84px;
+    }
+}
+
+/* Copyright como limite inferior: fundos terminam antes da barra */
+.wrapper-horizontal > section:not(.section-hero) {
+    padding-bottom: var(--section-copyright-height);
+}
+
+.slider-container,
+#servicos .services-bg-layer,
+#servicos .services-overlay,
+.metodo-imagens,
+.contato-arte {
+    bottom: var(--section-copyright-height);
+}
+
+.section-hero .slider-container {
+    height: auto;
+}
+
+@media (min-width: 769px) {
+    .metodo-imagens,
+    .contato-arte {
+        height: auto;
+    }
+}
+
+#servicos .services-shell,
+.gestao-bpx-temp,
+.container-metodo,
+.section-placeholder,
+.contato-shell {
+    padding-bottom: calc(var(--section-copyright-height) + 18px);
+}
+
+@media (max-width: 768px) {
+    #servicos .services-shell,
+    .gestao-bpx-temp,
+    .container-metodo,
+    .section-placeholder,
+    .contato-shell {
+        padding-bottom: calc(var(--section-copyright-height) + 16px);
+    }
+}
+
+@media (min-width: 769px) {
+    #servicos .services-cta {
+        margin-top: clamp(124px, 22vh, 180px);
     }
 }
