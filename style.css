@@ -2646,3 +2646,29 @@ body.menu-scroll-lock {
         height: max(84px, calc(66px + env(safe-area-inset-bottom)));
     }
 }
+
+/* Servicos desktop: respiro real abaixo do CTA antes do rodape fixo */
+#servicos {
+    --services-scroll-spacer: 96px;
+}
+
+#servicos .services-shell::after {
+    content: '';
+    display: block;
+    grid-column: 1 / -1;
+    width: 100%;
+    height: var(--services-scroll-spacer);
+    pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+    #servicos {
+        --services-scroll-spacer: 96px;
+    }
+}
+
+@media (max-width: 768px) {
+    #servicos {
+        --services-scroll-spacer: 84px;
+    }
+}
