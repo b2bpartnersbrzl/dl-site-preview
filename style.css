@@ -2205,7 +2205,7 @@ body.menu-scroll-lock {
     .contato-mapa-mobile {
         width: 100vw;
         max-width: none;
-        aspect-ratio: 3 / 2;
+        aspect-ratio: 1 / 1;
         margin-left: calc(50% - 50vw);
         margin-right: calc(50% - 50vw);
         margin-bottom: 24px;
