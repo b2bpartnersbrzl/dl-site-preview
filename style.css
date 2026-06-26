@@ -2554,3 +2554,56 @@ body.menu-scroll-lock {
         padding-top: 0;
     }
 }
+
+/* Regra estrutural: conteudo nunca nasce atras do header fixo */
+:root {
+    --fixed-header-height: 90px;
+    --headline-safe-gap: 24px;
+    --headline-safe-top: calc(var(--fixed-header-height) + var(--headline-safe-gap));
+}
+
+.wrapper-horizontal > section:not(.section-hero) {
+    align-items: flex-start;
+    scroll-margin-top: var(--headline-safe-top);
+}
+
+#servicos .services-shell {
+    padding-top: max(140px, var(--headline-safe-top));
+}
+
+.gestao-bpx-temp {
+    padding-top: var(--headline-safe-top);
+}
+
+.container-metodo {
+    padding-top: var(--headline-safe-top);
+    padding-bottom: 56px;
+    align-items: center;
+}
+
+.metodo-conteudo {
+    padding-top: 0;
+}
+
+.section-placeholder {
+    align-items: flex-start;
+    padding-top: var(--headline-safe-top);
+}
+
+.contato-shell {
+    padding-top: max(160px, var(--headline-safe-top));
+}
+
+@media (max-width: 768px) {
+    :root {
+        --headline-safe-gap: calc(24px + env(safe-area-inset-top));
+    }
+
+    #servicos .services-shell,
+    .gestao-bpx-temp,
+    .container-metodo,
+    .section-placeholder,
+    .contato-shell {
+        padding-top: var(--headline-safe-top);
+    }
+}
