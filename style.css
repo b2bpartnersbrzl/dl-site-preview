@@ -1572,42 +1572,34 @@ body.menu-scroll-lock {
 }
 
 /* ==========================================================================
-   RODAPÉ DISCRETO DE DIREITOS AUTORAIS
+   BARRA DISCRETA DE DIREITOS AUTORAIS
    ========================================================================== */
-:root {
-    --section-copyright-height: 28px;
-}
-
-.wrapper-horizontal > section::after {
-    content: '© 2026 DL Assessoria Regulatória.';
-    position: relative;
-    z-index: 40;
-    display: flex;
-    flex: 0 0 auto;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 0;
-    padding: 7px 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.13);
-    background-color: rgba(10, 14, 26, 0.42);
-    color: rgba(255, 255, 255, 0.68);
+.copyright-bar {
+    position: fixed;
+    right: 0;
+    bottom: 24px;
+    z-index: 900;
+    width: fit-content;
+    max-width: calc(100% - 32px);
+    padding: 8px 18px 8px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-right: 0;
+    border-radius: 999px 0 0 999px;
+    background-color: rgba(26, 26, 46, 0.34);
+    backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.72);
     font-size: 0.74rem;
     font-weight: 600;
     line-height: 1;
     letter-spacing: 0.01em;
-    text-align: center;
     pointer-events: none;
-    backdrop-filter: blur(6px);
 }
 
 @media (max-width: 768px) {
-    :root {
-        --section-copyright-height: 26px;
-    }
-
-    .wrapper-horizontal > section::after {
-        padding: 6px 16px;
+    .copyright-bar {
+        bottom: 16px;
+        max-width: calc(100% - 24px);
+        padding: 7px 14px 7px 16px;
         font-size: 0.68rem;
         backdrop-filter: none;
     }
@@ -2676,76 +2668,8 @@ body.menu-scroll-lock {
     }
 }
 
-/* Copyright como limite inferior: fundos terminam antes da barra */
-.wrapper-horizontal > section:not(.section-hero) {
-    padding-bottom: var(--section-copyright-height);
-}
-
-.slider-container,
-#servicos .services-bg-layer,
-#servicos .services-overlay,
-.metodo-imagens,
-.contato-arte {
-    bottom: var(--section-copyright-height);
-}
-
-.section-hero .slider-container {
-    height: auto;
-}
-
-@media (min-width: 769px) {
-    .metodo-imagens,
-    .contato-arte {
-        height: auto;
-    }
-}
-
-#servicos .services-shell,
-.gestao-bpx-temp,
-.container-metodo,
-.section-placeholder,
-.contato-shell {
-    padding-bottom: calc(var(--section-copyright-height) + 18px);
-}
-
-@media (max-width: 768px) {
-    #servicos .services-shell,
-    .gestao-bpx-temp,
-    .container-metodo,
-    .section-placeholder,
-    .contato-shell {
-        padding-bottom: calc(var(--section-copyright-height) + 16px);
-    }
-}
-
 @media (min-width: 769px) {
     #servicos .services-cta {
         margin-top: clamp(124px, 22vh, 180px);
-    }
-}
-
-/* Copyright no fluxo: a barra e o fim absoluto da secao */
-.wrapper-horizontal > section:not(.section-hero) {
-    flex-direction: column;
-    padding-bottom: 0;
-}
-
-#servicos .services-shell,
-.gestao-bpx-temp,
-.container-metodo,
-.section-placeholder,
-.contato-shell {
-    min-height: calc(100vh - var(--section-copyright-height));
-    padding-bottom: 18px;
-}
-
-@media (max-width: 768px) {
-    #servicos .services-shell,
-    .gestao-bpx-temp,
-    .container-metodo,
-    .section-placeholder,
-    .contato-shell {
-        min-height: calc(100svh - var(--section-copyright-height));
-        padding-bottom: 16px;
     }
 }
