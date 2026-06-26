@@ -2524,3 +2524,33 @@ body.menu-scroll-lock {
         padding-top: max(90px, calc(90px + env(safe-area-inset-top)));
     }
 }
+
+/* Tablet/mobile: nenhuma headline deve ficar sob o header */
+@media (max-width: 1100px) {
+    :root {
+        --header-safe-space: calc(90px + env(safe-area-inset-top));
+        --section-safe-start: calc(var(--header-safe-space) + 24px);
+    }
+
+    html {
+        scroll-padding-top: var(--section-safe-start);
+    }
+
+    .wrapper-horizontal > section:not(.section-hero) {
+        align-items: flex-start;
+        justify-content: flex-start;
+        scroll-margin-top: var(--section-safe-start);
+    }
+
+    #servicos .services-shell,
+    .gestao-bpx-temp,
+    .container-metodo,
+    .section-placeholder,
+    .contato-shell {
+        padding-top: max(var(--section-safe-start), 114px);
+    }
+
+    .metodo-conteudo {
+        padding-top: 0;
+    }
+}
