@@ -25,8 +25,9 @@
     <link rel="icon" href="assets/favicon_dl.svg" type="image/svg+xml" sizes="any">
     <link rel="icon" href="assets/favicon_dl.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/favicon_dl_maior.png">
-    <link rel="preload" as="image" href="images/0001_mobile_opt.webp" type="image/webp">
-    <link rel="prefetch" as="image" href="images/mapa_mobile_opt.webp" type="image/webp" media="(max-width: 768px)">
+        <link rel="preload" as="image" href="images/fundo_bpx.webp" type="image/webp">
+    <link rel="preload" as="image" href="images/fundo_dash.webp" type="image/webp">
+<link rel="prefetch" as="image" href="images/mapa_mobile_opt.webp" type="image/webp" media="(max-width: 768px)">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -134,12 +135,23 @@
             </div>
         </section>
 
-        <section id="gestao-bpx" class="section-full section-gestao-bpx-temp" aria-labelledby="gestao-bpx-title">
-            <div class="gestao-bpx-temp">
-                <img class="gestao-bpx-loading" src="images/loading-dl.svg" alt="" aria-hidden="true">
-                <h2 id="gestao-bpx-title">Gestão BPx</h2>
-                <p>Ambiente de gestão regulatória em desenvolvimento para organizar rotinas, evidências e acompanhamento contínuo.</p>
-                <a class="gestao-bpx-link" href="https://gestaobpx.com.br/login?from=%2F" target="_blank" rel="noopener noreferrer">Acessar plataforma BPx</a>
+        <section id="gestao-bpx" class="section-full section-gestao-bpx" aria-labelledby="gestao-bpx-title">
+            <div class="gestao-bpx-bg" aria-hidden="true">
+                <img src="images/fundo_bpx.webp" alt="">
+            </div>
+
+            <div class="gestao-bpx-content">
+                <p class="gestao-bpx-eyebrow">Gestão BPx</p>
+                <h2 id="gestao-bpx-title">Controle regulatório com visão de gestão.</h2>
+                <p>
+                    Uma plataforma proprietária para acompanhar documentos, treinamentos, atividades periódicas
+                    e indicadores críticos da operação com previsibilidade e governança.
+                </p>
+                <a class="gestao-bpx-cta" href="#contato" data-section-link>Conhecer a Gestão BPx</a>
+            </div>
+
+            <div class="gestao-bpx-visual" aria-hidden="true">
+                <img class="gestao-bpx-dashboard" src="images/fundo_dash.webp" alt="">
             </div>
         </section>
 
