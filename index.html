@@ -25,8 +25,7 @@
     <link rel="icon" href="assets/favicon_dl.svg" type="image/svg+xml" sizes="any">
     <link rel="icon" href="assets/favicon_dl.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/favicon_dl_maior.png">
-        <link rel="preload" as="image" href="images/fundo_bpx.webp" type="image/webp">
-    <link rel="preload" as="image" href="images/fundo_dash.webp" type="image/webp">
+    <link rel="preload" as="image" href="images/fundo_dash.webp?v=2" type="image/webp">
 <link rel="prefetch" as="image" href="images/mapa_mobile_opt.webp" type="image/webp" media="(max-width: 768px)">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -136,13 +135,10 @@
         </section>
 
         <section id="gestao-bpx" class="section-full section-gestao-bpx" aria-labelledby="gestao-bpx-title">
-            <div class="gestao-bpx-bg" aria-hidden="true">
-                <img src="images/fundo_bpx.webp" alt="">
-            </div>
+            <div class="gestao-bpx-bg" aria-hidden="true"></div>
 
             <div class="gestao-bpx-content">
-                <p class="gestao-bpx-eyebrow">Gestão BPx</p>
-                <h2 id="gestao-bpx-title">Controle regulatório com visão de gestão.</h2>
+                <h2 id="gestao-bpx-title"><span>Controle real</span><span>tem nome.</span><span>Gestão BPx.</span></h2>
                 <p>
                     Uma plataforma proprietária para acompanhar documentos, treinamentos, atividades periódicas
                     e indicadores críticos da operação com previsibilidade e governança.
@@ -151,7 +147,7 @@
             </div>
 
             <div class="gestao-bpx-visual" aria-hidden="true">
-                <img class="gestao-bpx-dashboard" src="images/fundo_dash.webp" alt="">
+                <img class="gestao-bpx-dashboard" src="images/fundo_dash.webp?v=2" alt="">
             </div>
         </section>
 
@@ -335,7 +331,13 @@
             const linksMenu = document.querySelectorAll('.menu-navegacao ul li a');
             const secoes = Array.from(document.querySelectorAll('.wrapper-horizontal > section'));
             const desktopQuery = window.matchMedia('(min-width: 769px)');
-            let secaoAtual = document.querySelector('.wrapper-horizontal > section.active') || document.getElementById('inicio');
+            const obterSecaoPorHash = (hash) => {
+                if (!hash || !hash.startsWith('#')) return null;
+                const alvo = document.querySelector(hash);
+                return alvo && secoes.includes(alvo) ? alvo : null;
+            };
+            const secaoInicial = obterSecaoPorHash(window.location.hash);
+            let secaoAtual = secaoInicial || document.querySelector('.wrapper-horizontal > section.active') || document.getElementById('inicio');
 
             const atualizarMenuAtivo = (id) => {
                 linksMenu.forEach(link => {
@@ -356,17 +358,33 @@
                 document.body.classList.toggle('menu-scroll-lock', acionar);
             };
 
-            const navegarParaSecao = (targetId) => {
+            const atualizarHistoricoSecao = (id, modo = 'push') => {
+                const novoHash = `#${id}`;
+                if (window.location.hash === novoHash) return;
+
+                if (modo === 'replace') {
+                    window.history.replaceState({ sectionId: id }, '', novoHash);
+                } else if (modo === 'push') {
+                    window.history.pushState({ sectionId: id }, '', novoHash);
+                }
+            };
+
+            const navegarParaSecao = (targetId, opcoes = {}) => {
                 if (!targetId || !targetId.startsWith('#')) return;
 
                 const targetSection = document.querySelector(targetId);
                 if (!targetSection) return;
 
+                const atualizarHistorico = opcoes.history !== false;
+                const modoHistorico = opcoes.historyMode || 'push';
+                const comportamentoScroll = opcoes.smooth === false ? 'auto' : 'smooth';
+
                 atualizarMenuAtivo(targetSection.id);
 
                 if (desktopQuery.matches) {
                     if (targetSection === secaoAtual) {
-                        targetSection.scrollTo({ top: 0, behavior: 'smooth' });
+                        if (atualizarHistorico) atualizarHistoricoSecao(targetSection.id, modoHistorico);
+                        targetSection.scrollTo({ top: 0, behavior: comportamentoScroll });
                         return;
                     }
 
@@ -378,8 +396,10 @@
                     secaoAtual = targetSection;
                     const headerOffset = header ? header.offsetHeight + 18 : 108;
                     const targetTop = targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
-                    window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+                    window.scrollTo({ top: Math.max(0, targetTop), behavior: comportamentoScroll });
                 }
+
+                if (atualizarHistorico) atualizarHistoricoSecao(targetSection.id, modoHistorico);
             };
 
             if (btnMenu) {
@@ -409,9 +429,85 @@
             });
 
             window.addEventListener('resize', prepararDesktop);
+            window.addEventListener('popstate', () => {
+                const targetSection = obterSecaoPorHash(window.location.hash) || document.getElementById('inicio');
+                if (!targetSection) return;
+                navegarParaSecao(`#${targetSection.id}`, { history: false, smooth: false });
+            });
 
             prepararDesktop();
+            if (secaoAtual) {
+                navegarParaSecao(`#${secaoAtual.id}`, { historyMode: window.location.hash ? 'replace' : 'replace', smooth: false });
+            }
             atualizarMenuAtivo(secaoAtual ? secaoAtual.id : 'inicio');
+
+            const gestaoBpxSection = document.getElementById('gestao-bpx');
+
+            if (gestaoBpxSection) {
+                const gestaoBpxVisual = gestaoBpxSection.querySelector('.gestao-bpx-visual');
+                let bpxFrame = null;
+                let bpxCurrentX = 0;
+                let bpxCurrentY = 0;
+                let bpxTargetX = 0;
+                let bpxTargetY = 0;
+
+                const escreverParallaxBpx = (x, y) => {
+                    gestaoBpxSection.style.setProperty('--bpx-panel-x', `${x * 28}px`);
+                    gestaoBpxSection.style.setProperty('--bpx-panel-y', `${y * 28}px`);
+                    gestaoBpxSection.style.setProperty('--bpx-rotate-x', `${1 - y * 8}deg`);
+                    gestaoBpxSection.style.setProperty('--bpx-rotate-y', `${-8 + x * 10}deg`);
+                    gestaoBpxSection.style.setProperty('--bpx-shadow-y', `${58 + y * 14}px`);
+                };
+
+                const resetarParallaxBpx = () => {
+                    bpxCurrentX = 0;
+                    bpxCurrentY = 0;
+                    bpxTargetX = 0;
+                    bpxTargetY = 0;
+                    escreverParallaxBpx(0, 0);
+                };
+
+                const aplicarParallaxBpx = () => {
+                    if (!desktopQuery.matches) {
+                        resetarParallaxBpx();
+                        bpxFrame = null;
+                        return;
+                    }
+
+                    bpxCurrentX += (bpxTargetX - bpxCurrentX) * 0.16;
+                    bpxCurrentY += (bpxTargetY - bpxCurrentY) * 0.16;
+                    escreverParallaxBpx(bpxCurrentX, bpxCurrentY);
+
+                    if (Math.abs(bpxTargetX - bpxCurrentX) > 0.002 || Math.abs(bpxTargetY - bpxCurrentY) > 0.002) {
+                        bpxFrame = requestAnimationFrame(aplicarParallaxBpx);
+                    } else {
+                        bpxCurrentX = bpxTargetX;
+                        bpxCurrentY = bpxTargetY;
+                        escreverParallaxBpx(bpxCurrentX, bpxCurrentY);
+                        bpxFrame = null;
+                    }
+                };
+
+                gestaoBpxVisual?.addEventListener('pointermove', (event) => {
+                    if (!desktopQuery.matches) return;
+
+                    const rect = gestaoBpxVisual.getBoundingClientRect();
+                    const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                    const y = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+
+                    bpxTargetX = Math.max(-1, Math.min(1, x));
+                    bpxTargetY = Math.max(-1, Math.min(1, y));
+
+                    if (!bpxFrame) {
+                        bpxFrame = requestAnimationFrame(aplicarParallaxBpx);
+                    }
+                });
+
+                desktopQuery.addEventListener('change', () => {
+                    if (!desktopQuery.matches) resetarParallaxBpx();
+                });
+                resetarParallaxBpx();
+            }
 
             const serviceItems = document.querySelectorAll('#servicos .service-item');
             const serviceBackgrounds = document.querySelectorAll('#servicos .service-bg');
