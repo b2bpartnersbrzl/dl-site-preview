@@ -393,8 +393,10 @@
                     targetSection.scrollTop = 0;
                     secaoAtual = targetSection;
                 } else {
+                    secoes.forEach(section => section.classList.remove('active'));
+                    targetSection.classList.add('active');
                     secaoAtual = targetSection;
-                    const headerOffset = header ? header.offsetHeight + 18 : 108;
+                    const headerOffset = 0;
                     const targetTop = targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
                     window.scrollTo({ top: Math.max(0, targetTop), behavior: comportamentoScroll });
                 }
@@ -438,6 +440,13 @@
             prepararDesktop();
             if (secaoAtual) {
                 navegarParaSecao(`#${secaoAtual.id}`, { historyMode: window.location.hash ? 'replace' : 'replace', smooth: false });
+                if (window.location.hash && !desktopQuery.matches) {
+                    window.requestAnimationFrame(() => {
+                        window.setTimeout(() => {
+                            navegarParaSecao(`#${secaoAtual.id}`, { history: false, smooth: false });
+                        }, 80);
+                    });
+                }
             }
             atualizarMenuAtivo(secaoAtual ? secaoAtual.id : 'inicio');
 
