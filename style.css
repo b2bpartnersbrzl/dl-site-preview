@@ -3076,3 +3076,66 @@ body.menu-scroll-lock {
 .section-metodo .item-metodo:not(:last-child)::after {
     background: linear-gradient(180deg, var(--metodo-step-color) 0%, var(--metodo-next-color) 100%);
 }
+
+/* Mobile: preserva a versao nova do Metodo sem reintroduzir peso no fluxo */
+@media (max-width: 768px) {
+    #metodo,
+    #contato {
+        content-visibility: auto !important;
+        contain-intrinsic-size: 1000px;
+    }
+
+    #servicos {
+        content-visibility: visible !important;
+    }
+
+    .section-metodo {
+        animation: none !important;
+        background-size: cover !important;
+    }
+
+    .section-metodo .metodo-bg-layer {
+        contain: paint;
+    }
+
+    .section-metodo .img-metodo {
+        background-image: url('images/0001_new.webp') !important;
+        filter: none !important;
+        transform: none !important;
+        transition: opacity 0.12s linear, visibility 0.12s linear !important;
+        will-change: auto !important;
+        backface-visibility: visible;
+    }
+
+    .section-metodo .img-metodo:not(.ativo) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    .section-metodo .metodo-overlay::before {
+        display: none !important;
+        animation: none !important;
+    }
+
+    .section-metodo .metodo-overlay::after {
+        background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(26, 26, 46, 0.20) 62%, rgba(26, 26, 46, 0.44) 100%);
+    }
+
+    .section-metodo .item-metodo,
+    .section-metodo .metodo-numero,
+    .section-metodo .metodo-texto h3,
+    .section-metodo .metodo-texto p,
+    .section-metodo .metodo-cta-text {
+        text-shadow: none;
+    }
+
+    .section-metodo .item-metodo,
+    .section-metodo .metodo-numero {
+        transition-duration: 0.08s;
+    }
+
+    .contato-mapa-mobile {
+        content-visibility: auto;
+        contain-intrinsic-size: 1000px;
+    }
+}
