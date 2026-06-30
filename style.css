@@ -376,48 +376,16 @@ body.menu-scroll-lock {
 }
 
 #servicos .service-item {
-    position: relative;
     padding: 20px 0 22px;
     border-top: 1px solid rgba(255, 255, 255, 0.20);
     opacity: 0.48;
     cursor: pointer;
-    transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.45s ease;
+    transition: opacity 0.35s ease, transform 0.35s ease;
     outline: none;
 }
 
 #servicos .service-item:last-child {
     border-bottom: 1px solid rgba(255, 255, 255, 0.20);
-}
-
-#servicos .service-item.active + .service-item {
-    border-top-color: rgba(45, 106, 79, 0.86);
-}
-
-#servicos .service-item.active:last-child {
-    border-bottom-color: rgba(45, 106, 79, 0.86);
-}
-
-#servicos .service-item::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.20);
-    opacity: 0;
-    box-shadow: none;
-    pointer-events: none;
-    transition: opacity 0.45s ease, background-color 0.45s ease, box-shadow 0.45s ease;
-}
-
-#servicos .service-item.active::after {
-    opacity: 1;
-    background-color: rgba(45, 106, 79, 0.92);
-    box-shadow:
-        0 0 10px rgba(45, 106, 79, 0.52),
-        0 0 22px rgba(45, 106, 79, 0.32),
-        0 0 38px rgba(45, 106, 79, 0.16);
 }
 
 #servicos .service-item h3 {
@@ -1231,7 +1199,11 @@ body.menu-scroll-lock {
     isolation: isolate;
     justify-content: flex-start;
     align-items: stretch;
-    background: #071428;
+    background-color: #071428;
+    background-image: url('images/dash_bg_section.webp');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100% auto;
     color: #ffffff;
 }
 
@@ -1239,7 +1211,17 @@ body.menu-scroll-lock {
     display: none;
 }
 
-.section-gestao-bpx::before,
+.section-gestao-bpx::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(7, 20, 40, 0.82) 0%, rgba(7, 20, 40, 0.58) 34%, rgba(7, 20, 40, 0.20) 68%, rgba(7, 20, 40, 0.34) 100%),
+        linear-gradient(180deg, rgba(7, 20, 40, 0.24) 0%, rgba(7, 20, 40, 0.06) 42%, rgba(7, 20, 40, 0.32) 100%);
+}
+
 .section-gestao-bpx::after,
 .gestao-bpx-bg::before,
 .gestao-bpx-bg::after,
@@ -1250,7 +1232,7 @@ body.menu-scroll-lock {
 
 .gestao-bpx-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     align-self: flex-start;
     width: min(520px, calc(100% - 48px));
     margin-left: clamp(24px, 7vw, 108px);
@@ -1311,7 +1293,7 @@ body.menu-scroll-lock {
     position: absolute;
     right: clamp(70px, 8vw, 130px);
     top: 50%;
-    z-index: 1;
+    z-index: 2;
     width: min(40.25vw, 635px);
     transform: translate3d(var(--bpx-panel-x), calc(-40% + var(--bpx-panel-y)), 0) perspective(1400px) rotateY(var(--bpx-rotate-y)) rotateX(var(--bpx-rotate-x));
     transform-style: preserve-3d;
