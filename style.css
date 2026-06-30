@@ -376,16 +376,48 @@ body.menu-scroll-lock {
 }
 
 #servicos .service-item {
+    position: relative;
     padding: 20px 0 22px;
     border-top: 1px solid rgba(255, 255, 255, 0.20);
     opacity: 0.48;
     cursor: pointer;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.45s ease;
     outline: none;
 }
 
 #servicos .service-item:last-child {
     border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+#servicos .service-item.active + .service-item {
+    border-top-color: rgba(45, 106, 79, 0.86);
+}
+
+#servicos .service-item.active:last-child {
+    border-bottom-color: rgba(45, 106, 79, 0.86);
+}
+
+#servicos .service-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.20);
+    opacity: 0;
+    box-shadow: none;
+    pointer-events: none;
+    transition: opacity 0.45s ease, background-color 0.45s ease, box-shadow 0.45s ease;
+}
+
+#servicos .service-item.active::after {
+    opacity: 1;
+    background-color: rgba(45, 106, 79, 0.92);
+    box-shadow:
+        0 0 10px rgba(45, 106, 79, 0.52),
+        0 0 22px rgba(45, 106, 79, 0.32),
+        0 0 38px rgba(45, 106, 79, 0.16);
 }
 
 #servicos .service-item h3 {
