@@ -2441,7 +2441,7 @@ body.menu-scroll-lock {
         height: 100%;
         max-width: none;
         object-fit: cover;
-        object-position: center;
+        object-position: 44% center;
     }
 }
 /* Mobile flow optimization: preserva elementos, reduz repaints e melhora resposta ao toque */
