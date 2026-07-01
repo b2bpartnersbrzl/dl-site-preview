@@ -376,11 +376,13 @@ body.menu-scroll-lock {
 }
 
 #servicos .service-item {
+    position: relative;
     padding: 20px 0 22px;
     border-top: 1px solid rgba(255, 255, 255, 0.20);
     opacity: 0.48;
     cursor: pointer;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    overflow: visible;
+    transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.45s ease;
     outline: none;
 }
 
@@ -3387,5 +3389,69 @@ body.menu-scroll-lock {
     #gestao-bpx.section-full.section-gestao-bpx,
     .wrapper-horizontal > #gestao-bpx.section-full.section-gestao-bpx.active {
         padding-bottom: var(--mobile-section-end-gap);
+    }
+}
+
+
+/* ==========================================================================
+   CORREÇÃO FINAL — LINHA VERDE ACESA DOS SERVIÇOS ATIVOS
+   ========================================================================== */
+@media (min-width: 769px) {
+    #servicos.services-editorial .services-list .service-item {
+        position: relative;
+        overflow: visible;
+        border-top-color: rgba(255, 255, 255, 0.20);
+        transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.45s ease;
+    }
+
+    #servicos.services-editorial .services-list .service-item:last-child {
+        border-bottom-color: rgba(255, 255, 255, 0.20);
+    }
+
+    #servicos.services-editorial .services-list .service-item.active + .service-item {
+        border-top-color: rgba(45, 106, 79, 0.64);
+    }
+
+    #servicos.services-editorial .services-list .service-item.active:last-child {
+        border-bottom-color: rgba(45, 106, 79, 0.64);
+    }
+
+    #servicos.services-editorial .services-list .service-item::after {
+        content: '' !important;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        z-index: 5;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0 !important;
+        border-radius: 0;
+        background:
+            linear-gradient(90deg,
+                rgba(45, 106, 79, 0) 0%,
+                rgba(45, 106, 79, 0.30) 16%,
+                rgba(45, 106, 79, 0.82) 48%,
+                rgba(45, 106, 79, 0.32) 84%,
+                rgba(45, 106, 79, 0) 100%);
+        opacity: 0;
+        transform: scaleX(0.78);
+        transform-origin: center;
+        pointer-events: none;
+        box-shadow: none;
+        transition:
+            opacity 0.34s ease,
+            transform 0.42s ease,
+            box-shadow 0.42s ease;
+    }
+
+    #servicos.services-editorial .services-list .service-item.active::after {
+        opacity: 1;
+        transform: scaleX(1);
+        box-shadow:
+            0 0 6px rgba(45, 106, 79, 0.38),
+            0 0 14px rgba(45, 106, 79, 0.22),
+            0 0 24px rgba(45, 106, 79, 0.12);
     }
 }
